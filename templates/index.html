@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <form action="/" method="POST">
+        <label for="titulo">Título do Filme:</label>
+        <input type="text" id="titulo" name="titulo" required>
+        <button type="submit">Adicionar Filme</button>
+    </form>
+
+    <p>Você tem {{ total }} filmes favoritos.</p>
+
+    {% if filmes %}
+        <ul>
+            {% for filme in filmes %}
+                <li>
+                    {{ filme }} 
+                    - <a href="/remover/{{ loop.index0 }}">Remover</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Sua lista está vazia. Adicione seu primeiro filme favorito!</p>
+    {% endif %}
+{% endblock %}
+
