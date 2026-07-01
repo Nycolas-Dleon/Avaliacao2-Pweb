@@ -42,5 +42,10 @@ def index():
 def sucesso():
     return render_template('sucesso.html')
 
+@app.route('/remover/<int:indice>')
+def remover(indice):
+    remover_filme(indice)
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(debug=True)
