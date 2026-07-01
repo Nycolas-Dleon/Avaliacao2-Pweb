@@ -1,0 +1,34 @@
+1 - Diferença entre git merge e git rebase
+
+git merge: Une o histórico de duas branches criando um novo commit de merge, preservando a ordem cronológica exata de como o desenvolvimento ocorreu.
+
+git rebase: Reescreve o histórico do projeto, movendo os commits da branch atual para o topo da branch de destino, reesultando é um histórico linear.
+
+2 - Diferença entre GET e POST
+GET: Utilizado para buscar informações do servidor. Os parâmetros são visíveis na URL. Não deve ser usado para coleta de dados sensíveis.
+
+POST: Utilizado para enviar dados que modificam o estado do servidor (criar ou alterar registros). Os dados são enviados no corpo da requisição e ficam ocultos na URL.
+
+Importância do POST para modificação de dados:
+O POST impede que dados sensíveis fiquem salvos no histórico do navegador ou nos logs do servidor. Além disso, não possui limitação de tamanho para o envio de dados e evita que ações de alteração sejam executadas acidentalmente por mecanismos de busca ou cliques repetidos.
+
+Exemplos
+GET: Busca por produtos em uma loja virtual, ex.: /produtos?busca=livro (exibido na barra de pesquisa).
+
+POST: Envio de um formulário de login com usuário e senha.
+
+3 - Request
+O objeto request é uma variável global que armazena os dados da requisição HTTP enviada pelo cliente. Ele permite ao servidor acessar as informações necessárias para processar a solicitação.
+
+Exemplo: if request.method == 'POST':
+            titulo = request.form.get('titulo')
+
+4 - Sessões e Segurança
+Funcionamento e Armazenamento:
+Por padrão, o Flask utiliza sessões baseadas no cliente. Os dados armazenados na sessão são convertidos em texto, assinados digitalmente e guardados no navegador do usuário na forma de um cookie.
+
+O Papel da secret_key:
+A secret_key é usada para gerar a assinatura criptográfica do cookie. Ela garante a integridade dos dados: o cliente pode ler o conteúdo da sessão, mas não pode modificá-lo. Se houver alteração indevida, o Flask rejeitará o cookie.
+
+Limitações:
+As limitações das sessões no Flask decorrem do armazenamento dos dados diretamente no navegador via cookies. Esse modelo restringe a capacidade de armazenamento a no máximo 4KB, aumenta o tráfego de rede, já que os dados são enviados a cada requisição HTTP, e inviabiliza o salvamento de informações confidenciais, visto que o conteúdo do cookie permanece visível ao usuário, embora protegido contra alterações.
