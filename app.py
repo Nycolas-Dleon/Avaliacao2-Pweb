@@ -25,5 +25,22 @@ def remover_filme(indice):
 def contar_filmes():
     return len(obter_filmes())
 
+# --- Rotas ---
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        titulo = request.form.get('titulo')
+        if titulo:
+            adicionar_filme(titulo)
+            return redirect(url_for('sucesso'))
+    
+    filmes = obter_filmes()
+    total = contar_filmes()
+    return render_template('index.html', filmes=filmes, total=total)
+
+@app.route('/sucesso')
+def sucesso():
+    return render_template('sucesso.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
